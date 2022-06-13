@@ -1,0 +1,12 @@
+stages:
+  - deploy
+  
+step-deploy-prod:
+  stage: deploy
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "staging"'
+  script:
+    - cd /var/www/html/landing-cehdf
+    - sudo git checkout staging
+    - sudo git pull
+  environment: staging
